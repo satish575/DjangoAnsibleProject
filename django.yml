@@ -1,0 +1,27 @@
+---
+- name: Deploy local django app to remote Ubuntu server
+  hosts: webservers
+  become: true
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Create app directory
+      file:
+        path: "{{ app_remote_path }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Copy app files to server
+      copy:
+        src: "{{ app_local_path }}/"
+        dest: "{{ app_remote_path }}/"
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'

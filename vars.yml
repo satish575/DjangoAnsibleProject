@@ -1,0 +1,3 @@
+app_local_path: "./DjangoAnsibleDemo"
+app_remote_path: "/var/www/DjangoProject"
+python_version: "3.x"

@@ -1,0 +1,33 @@
+---
+- name: Install NGINX on multiple Linux distributions
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install NGINX on Debian/Ubuntu
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      notify: Restart NGINX
+
+
+    - name: Install NGINX on RedHat/CentOS/Fedora
+      package:
+        name: nginx
+        state: present
+      when: ansible_os_family == "RedHat"
+      notify: Restart NGINX
+
+    - name: Ensure NGINX is enabled and running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: Restart NGINX
+      service:
+        name: nginx
+        state: restarted
