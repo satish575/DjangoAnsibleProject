@@ -25,3 +25,24 @@
         owner: ubuntu
         group: ubuntu
         mode: '0755'
+
+    # - name: Copy nginx configuration to server
+    #   copy:
+    #     src: "{{ nginx_conf_path }}"
+    #     dest: "{{ nginx_conf_dest }}"
+    #     owner: ubuntu
+    #     group: ubuntu
+    #     mode: '0755'
+
+    - name: Install Django using pip
+      shell: |
+        python3 -m pip install --upgrade pip
+        pip install django
+      args:
+        executable: /bin/bash
+
+    - name: Start Django project
+      shell: python3 manage.py runserver 0.0.0.0:8000
+      args:
+        chdir: /var/www/DjangoProject
+        

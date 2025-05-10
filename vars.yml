@@ -1,3 +1,5 @@
 app_local_path: "./DjangoAnsibleDemo"
 app_remote_path: "/var/www/DjangoProject"
 python_version: "3.x"
+nginx_conf_path: "django_nginx_conf"
+nginx_conf_dest: "/etc/nginx/sites-available/nginx_conf"
