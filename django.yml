@@ -9,7 +9,14 @@
     - name: Update APT cache
       apt:
         update_cache: yes
-
+    - name: install python
+      apt:
+        name: python3
+        state: present
+    - name: install pip
+      apt:
+        name: python3-pip
+        state: present
     - name: Create app directory
       file:
         path: "{{ app_remote_path }}"
